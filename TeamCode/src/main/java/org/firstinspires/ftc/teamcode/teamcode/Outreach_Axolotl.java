@@ -79,7 +79,6 @@ public class Outreach_Axolotl extends OpMode {
         // Tell the driver that initialization is complete.
     }
 
-
     @Override
     public void loop() {
         // Setup a variable for each drive wheel to save power level for telemetry
