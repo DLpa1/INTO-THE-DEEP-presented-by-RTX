@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.Mock;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import static java.lang.Math.*;
 
+@TeleOp
 public class Teleop extends LinearOpMode {
     private DcMotorEx fl, fr, bl, br;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -39,7 +42,6 @@ public class Teleop extends LinearOpMode {
         while(opModeIsActive() && !isStopRequested()){
             teleLoop();
         }
-
     }
 
     public void teleLoop() {
@@ -47,10 +49,11 @@ public class Teleop extends LinearOpMode {
         double frontRightPower;
         double backLeftPower;
         double backRightPower;
+        // [-1,1] -1 = 0.5
+        // 50% = 0.5
 
-
-        double drive_y = -gamepad1.left_stick_y;
-        double drive_x = 1.1*gamepad1.left_stick_x;
+        double drive_y = gamepad1.left_stick_y;
+        double drive_x = -1.1*gamepad1.left_stick_x;
         double turn = gamepad1.right_stick_x;
 
         frontLeftPower = drive_y + drive_x + turn;
@@ -69,5 +72,13 @@ public class Teleop extends LinearOpMode {
         fl.setPower(frontLeftPower);
         bl.setPower(backLeftPower);
         br.setPower(backRightPower);
+
+
+        telemetry.addData("fl power", frontLeftPower);
+        telemetry.addData("fr power", frontRightPower);
+        telemetry.addData("bl power", backLeftPower);
+        telemetry.addData("br power", backRightPower);
+        telemetry.update();
+
     }
 }
